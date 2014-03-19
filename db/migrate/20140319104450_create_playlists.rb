@@ -3,9 +3,7 @@ class CreatePlaylists < ActiveRecord::Migration
     create_table :playlists do |t|
       t.string :name
       t.text :description
-      t.string :photo_file_name
-      t.string :photo_content_type
-      t.string :photo_file_size
+      t.attachment :photo
 
       t.timestamps
     end
