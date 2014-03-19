@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
 
+  resources :playlists
+
   get 'users/new'
 
-  root 'static_pages#home'
+  root 'playlists#index'
   
   get '/signup', to: 'users#new', via: 'get'
   get '/help', to: 'static_pages#help', via: 'get'
   get '/about', to: 'static_pages#about', via: 'get'
   get '/contact', to: 'static_pages#contact', via: 'get'
+  get '/playlist/new', to: 'playlists#new', via: 'get'
+  get '/playlists', to: 'playlists#index', via: 'get'
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

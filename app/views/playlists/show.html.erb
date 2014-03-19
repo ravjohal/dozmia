@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @playlist.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @playlist.description %>
+</p>
+
+<p>
+  <strong>Photo file name:</strong>
+  <%= @playlist.photo %>
+</p>
+
+<p>
+  <strong>Photo content type:</strong>
+  <%= @playlist.photo_content_type %>
+</p>
+
+<p>
+  <strong>Photo file size:</strong>
+  <%= @playlist.photo_file_size %>
+</p>
+
+<%= link_to 'Edit', edit_playlist_path(@playlist) %> |
+<%= link_to 'Back', playlists_path %>

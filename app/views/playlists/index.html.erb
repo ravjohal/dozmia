@@ -1,0 +1,36 @@
+<%= link_to 'Create New Playlist', new_playlist_path %>
+
+<div class="row">
+  <div class="col-lg-6">
+    <h2>Playlists</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover tablesorter">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Photo</th>
+            <th>Photo file name</th>
+            <th>Photo content type</th>
+            <th>Photo file size</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @playlists.each do |playlist| %>
+            <tr>
+              <td><%= playlist.name %></td>
+              <td><%= playlist.description %></td>
+              <td><%= image_tag playlist.photo.url(:thumb) %></td>
+              <td><%= playlist.photo_file_name %></td>
+              <td><%= playlist.photo_content_type %></td>
+              <td><%= playlist.photo_file_size %></td>
+              <td><%= link_to 'Show', playlist %></td>
+              <td><%= link_to 'Edit', edit_playlist_path(playlist) %></td>
+              <td><%= link_to 'Destroy', playlist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+</div>
