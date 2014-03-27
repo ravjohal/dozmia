@@ -4,3 +4,7 @@
 require File.expand_path('../config/application', __FILE__)
 
 Rails.application.load_tasks
+
+if Rails.env == 'production'
+    Rake::Task["db:structure:dump"].clear
+end
