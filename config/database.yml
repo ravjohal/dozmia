@@ -4,21 +4,33 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
 #
-default: &default
-  adapter: sqlite3
-  pool: 5
-  timeout: 5000
+#default: &default
+#  adapter: sqlite3
+#  pool: 5
+#  timeout: 5000
 
-development:
-  <<: *default
-  database: db/development.sqlite3
+ development:
+  adapter: postgresql
+  encoding: utf8
+  database: dozmia_development
+  username: rav
+  password: sharks
+  host: localhost # not mandatory
+  pool: 5 # not mandatory
+  timeout: 5000 # not mandatory
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
-  database: db/test.sqlite3
+  adapter: postgresql
+  encoding: utf8
+  database: dozmia_test
+  username: rav
+  password: sharks
+  host: localhost # not mandatory
+  pool: 5 # not mandatory
+  timeout: 5000 # not mandatory
 
 # Do not keep production credentials in the repository,
 # instead read the configuration from the environment.
@@ -27,7 +39,11 @@ test:
 #   sqlite3://myuser:mypass@localhost/full/path/to/somedatabase
 #
 production:
-  adapter: sqlite3
-  pool: 5
-  timeout: 5000
+  encoding: utf8
+  database: dozmia_production
+  username: rav
+  password: sharks
+  host: localhost # not mandatory
+  pool: 5 # not mandatory
+  timeout: 5000 # not mandatory
 # url: <%= ENV["DATABASE_URL"] %>

@@ -11,8 +11,13 @@
 </p>
 
 <p>
+  <strong>Photo:</strong>
+  <%= image_tag @playlist.photo.url(:original) %>
+</p>
+
+<p>
   <strong>Photo file name:</strong>
-  <%= @playlist.photo %>
+  <%= @playlist.photo_file_name %>
 </p>
 
 <p>
