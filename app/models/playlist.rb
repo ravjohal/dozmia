@@ -1,5 +1,7 @@
 class Playlist < ActiveRecord::Base
 
+	has_many :tracks
+
 	has_attached_file :photo, :styles => { :medium => "300x300>", :thumb => "100x100>" }
                 # :url  => ":class/:attachment/:id/:style/:filename", # for some reason these ulr and path vars don't work!
                 # :path => ":class/:attachment/:id/:style/:filename"
