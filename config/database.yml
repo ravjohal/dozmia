@@ -39,6 +39,7 @@ test:
 #   sqlite3://myuser:mypass@localhost/full/path/to/somedatabase
 #
 production:
+  adapter: postgresql
   encoding: utf8
   database: dozmia_production
   username: rav
