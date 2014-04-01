@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   resources :playlists
 
   get 'users/new'
 
   root 'playlists#index'
   
-  get '/signup', to: 'users#new', via: 'get'
+  get '/register', to: 'users#new', via: 'get'
   get '/help', to: 'static_pages#help', via: 'get'
   get '/about', to: 'static_pages#about', via: 'get'
   get '/contact', to: 'static_pages#contact', via: 'get'

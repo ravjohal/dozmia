@@ -25,6 +25,9 @@ gem 'bootstrap-sass'
 gem 'paperclip', github: 'thoughtbot/paperclip'
 gem 'pg', '0.15.1'
 gem 'rename'
+gem 'devise'
+gem 'cancan'
+gem 'rolify'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

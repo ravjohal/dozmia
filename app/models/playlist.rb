@@ -1,5 +1,7 @@
 class Playlist < ActiveRecord::Base
 
+	resourcify
+	
 	has_many :tracks
 
 	has_attached_file :photo, :styles => { :medium => "300x300>", :thumb => "100x100>" }
