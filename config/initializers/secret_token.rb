@@ -24,4 +24,4 @@ def secure_token
   end
 end
 
-Dozmia::Application.config.secret_key_base = secure_token
+Dozmiabackup::Application.config.secret_key_base = secure_token

@@ -3,7 +3,7 @@ ruby '2.1.1'
 #ruby-gemset=railstutorial_rails_4_0
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.4'
+gem 'rails', '4.0.3'
 
 group :development, :test do
   gem 'rspec-rails', '2.13.1'
@@ -24,6 +24,7 @@ gem 'sprockets', '2.11.0'
 gem 'bootstrap-sass'
 gem 'paperclip', github: 'thoughtbot/paperclip'
 gem 'pg', '0.15.1'
+gem 'rename'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false
