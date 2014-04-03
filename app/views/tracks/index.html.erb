@@ -1,0 +1,29 @@
+<h1>Listing tracks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Delete</th>
+      <th>Track</th>
+      <th>Album</th>
+      <th>Artist</th>
+      <th>Label</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tracks.each do |track| %>
+      <tr>
+        <td><%= link_to 'Destroy', track, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= track.track %></td>
+        <td><%= track.album %></td>
+        <td><%= track.artist %></td>
+        <td><%= track.record_label %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Track', new_track_path %>

@@ -28,6 +28,7 @@ gem 'rename'
 gem 'devise'
 gem 'cancan'
 gem 'rolify'
+gem 'simple_form'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false
