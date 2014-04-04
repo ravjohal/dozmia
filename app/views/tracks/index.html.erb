@@ -3,22 +3,24 @@
 <table>
   <thead>
     <tr>
-      <th>Delete</th>
       <th>Track</th>
-      <th>Album</th>
-      <th>Artist</th>
-      <th>Label</th>
+      <th>Ismn num</th>
+      <th>Total plays</th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @tracks.each do |track| %>
       <tr>
-        <td><%= link_to 'Destroy', track, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <td><%= track.track %></td>
-        <td><%= track.album %></td>
-        <td><%= track.artist %></td>
-        <td><%= track.record_label %></td>
+        <td><%= track.ismn_num %></td>
+        <td><%= track.total_plays %></td>
+        <td><%= link_to 'Show', track %></td>
+        <td><%= link_to 'Edit', edit_track_path(track) %></td>
+        <td><%= link_to 'Destroy', track, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

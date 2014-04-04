@@ -2,17 +2,22 @@ class TracksController < ApplicationController
   before_action :set_track, only: [:show, :edit, :update, :destroy]
 
   # GET /tracks
+  # GET /tracks.json
   def index
     @tracks = Track.all
   end
 
   # GET /tracks/1
+  # GET /tracks/1.json
   def show
   end
 
   # GET /tracks/new
   def new
     @track = Track.new
+    @track.build_artist
+    @track.build_album
+    @track.build_record_label
   end
 
   # GET /tracks/1/edit
@@ -20,29 +25,43 @@ class TracksController < ApplicationController
   end
 
   # POST /tracks
+  # POST /tracks.json
   def create
     @track = Track.new(track_params)
 
-    if @track.save
-      redirect_to @track, notice: 'Track was successfully created.'
-    else
-      render action: 'new'
+    respond_to do |format|
+      if @track.save
+        format.html { redirect_to @track, notice: 'Track was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @track }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @track.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   # PATCH/PUT /tracks/1
+  # PATCH/PUT /tracks/1.json
   def update
-    if @track.update(track_params)
-      redirect_to @track, notice: 'Track was successfully updated.'
-    else
-      render action: 'edit'
+    respond_to do |format|
+      if @track.update(track_params)
+        format.html { redirect_to @track, notice: 'Track was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @track.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   # DELETE /tracks/1
+  # DELETE /tracks/1.json
   def destroy
     @track.destroy
-    redirect_to tracks_url, notice: 'Track was successfully destroyed.'
+    respond_to do |format|
+      format.html { redirect_to tracks_url }
+      format.json { head :no_content }
+    end
   end
 
   private
@@ -51,8 +70,8 @@ class TracksController < ApplicationController
       @track = Track.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
+    # Never trust parameters from the scary internet, only allow the white list through.
     def track_params
-      params.require(:track).permit(:title, :ismn_num, :total_plays)
+      params.require(:track).permit(:track, :ismn_num, :total_plays)
     end
 end

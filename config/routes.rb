@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :playlists
+  resources :tracks
+  
 
   get 'users/new'
 
@@ -13,6 +15,8 @@ Rails.application.routes.draw do
   get '/contact', to: 'static_pages#contact', via: 'get'
   get '/playlist/new', to: 'playlists#new', via: 'get'
   get '/playlists', to: 'playlists#index', via: 'get'
+  get '/tracks', to:'tracks#index', via: 'get'
+  get '/track/new', to: 'tracks#new', via: 'get'
 
 
 

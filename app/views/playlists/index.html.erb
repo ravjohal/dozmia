@@ -11,7 +11,7 @@
           <% if @playlists.size > 0 %>
           <% @playlists.each do |playlist| %>
             <tr>
-              <td><%= image_tag playlist.photo.url(:thumb) %></td>
+              <td><%= link_to (image_tag playlist.photo.url(:thumb)), edit_playlist_path(playlist) %></td>
               <td><%= link_to playlist.name, playlist %></td>
               <td><%= link_to 'Edit', edit_playlist_path(playlist), :class => "btn btn-default" %></td>
               <td><%= link_to 'Delete', playlist, :class => "btn btn-default", method: :delete, data: { confirm: 'Are you sure?' } %></td>

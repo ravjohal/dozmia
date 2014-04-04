@@ -23,7 +23,7 @@ describe TracksController do
   # This should return the minimal set of attributes required to create a valid
   # Track. As you add validations to Track, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { {  } }
+  let(:valid_attributes) { { "track" => "MyString" } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -85,14 +85,14 @@ describe TracksController do
       it "assigns a newly created but unsaved track as @track" do
         # Trigger the behavior that occurs when invalid params are submitted
         Track.any_instance.stub(:save).and_return(false)
-        post :create, {:track => {  }}, valid_session
+        post :create, {:track => { "track" => "invalid value" }}, valid_session
         assigns(:track).should be_a_new(Track)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Track.any_instance.stub(:save).and_return(false)
-        post :create, {:track => {  }}, valid_session
+        post :create, {:track => { "track" => "invalid value" }}, valid_session
         response.should render_template("new")
       end
     end
@@ -106,8 +106,8 @@ describe TracksController do
         # specifies that the Track created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Track.any_instance.should_receive(:update).with({ "these" => "params" })
-        put :update, {:id => track.to_param, :track => { "these" => "params" }}, valid_session
+        Track.any_instance.should_receive(:update).with({ "track" => "MyString" })
+        put :update, {:id => track.to_param, :track => { "track" => "MyString" }}, valid_session
       end
 
       it "assigns the requested track as @track" do
@@ -128,7 +128,7 @@ describe TracksController do
         track = Track.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Track.any_instance.stub(:save).and_return(false)
-        put :update, {:id => track.to_param, :track => {  }}, valid_session
+        put :update, {:id => track.to_param, :track => { "track" => "invalid value" }}, valid_session
         assigns(:track).should eq(track)
       end
 
@@ -136,7 +136,7 @@ describe TracksController do
         track = Track.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Track.any_instance.stub(:save).and_return(false)
-        put :update, {:id => track.to_param, :track => {  }}, valid_session
+        put :update, {:id => track.to_param, :track => { "track" => "invalid value" }}, valid_session
         response.should render_template("edit")
       end
     end
