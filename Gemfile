@@ -29,6 +29,8 @@ gem 'devise'
 gem 'cancan'
 gem 'rolify'
 gem 'simple_form'
+gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
+gem 'jquery-ui-rails'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

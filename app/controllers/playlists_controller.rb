@@ -17,18 +17,26 @@ class PlaylistsController < ApplicationController
   def new
     @playlist = Playlist.new
     #track = @playlist.tracks.build
-
+    #@track = Track.new
+    # 1.times do
+    #   track = @playlist.tracks.build
+    # end
+    # track_once = Track.new
   end
 
   # GET /playlists/1/edit
   def edit
+    #track = @playlist.tracks
+    # track.build_artist
+    # track.build_album
+    # track.build_record_label
   end
 
   # POST /playlists
   # POST /playlists.json
   def create
     @playlist = Playlist.new(playlist_params)
-
+   #puts " this is the tracks: " + @playlist.tracks
     respond_to do |format|
       if @playlist.save
         format.html { redirect_to @playlist, notice: 'Playlist was successfully created.' }
@@ -72,6 +80,7 @@ class PlaylistsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def playlist_params
-      params.require(:playlist).permit(:name, :description, :photo, :photo_file_name, :photo_content_type, :photo_file_size)
+      params.require(:playlist).permit(:name, :description, :photo, :photo_file_name, :photo_content_type, :photo_file_size,
+          :tracks_attributes => [:id, :title, :artist, :album, :label, :ismn_num, :total_plays, :playlist_id, :audio, :audio_file_name, :audio_content_type, :audio_file_size])
     end
 end
