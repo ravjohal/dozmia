@@ -31,6 +31,14 @@ gem 'rolify'
 gem 'simple_form'
 gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
 gem 'jquery-ui-rails'
+gem 'ruby-audioinfo'
+gem 'ruby-mp3info'
+gem 'ruby-ogginfo'
+gem 'mp4info'
+gem 'apetag'
+gem 'flacinfo-rb'
+gem 'moumar-wmainfo-rb'
+gem 'hoe'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

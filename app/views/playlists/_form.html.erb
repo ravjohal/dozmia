@@ -34,8 +34,8 @@
       <%= ff.file_field :audio %>
     <% end %>
   </div>
-  <table id="tracks" class="display">
-    <% if !@playlist.tracks.blank? %>
+  <% if !@playlist.tracks.blank? %>
+  <table id="tracks" class="table">
       <thead>
         <tr>
           <th>Track</th>
@@ -44,13 +44,13 @@
           <th>Label</th>
         </tr>
       </thead>
-    <% end %>
     <tbody>
     <%= f.fields_for :tracks do |ff| %>
       <%= render "track_fields", :f => ff %>
     <% end %>
     </tbody>
   </table>
+  <% end %>
   <div class="actions">
     <%= f.submit "Save" %>
   </div>

@@ -1,3 +1,5 @@
+require "mp3info"
+
 class PlaylistsController < ApplicationController
   before_action :set_playlist, only: [:show, :edit, :update, :destroy]
 
@@ -36,7 +38,20 @@ class PlaylistsController < ApplicationController
   # POST /playlists.json
   def create
     @playlist = Playlist.new(playlist_params)
-   #puts " this is the tracks: " + @playlist.tracks
+   #puts " this is the tracks: " + playlist_params["tracks_attributes"]["0"]["audio"].path.to_s
+   track = @playlist.tracks[0]
+
+    Mp3Info.open(playlist_params["tracks_attributes"]["0"]["audio"].path.to_s) do |info|
+      # puts "title: " + info.tag.title
+      # puts "artist: " + info.tag.artist
+      # puts "artist: " + info.tag.album
+      # puts "tracknum: " + info.tag.tracknum.to_s
+      track.audio_file_name = info.tag.title
+      track.artist = info.tag.artist
+      track.album  = info.tag.album
+      # tracknum = info.tag.tracknum.to_s
+    end
+
     respond_to do |format|
       if @playlist.save
         format.html { redirect_to @playlist, notice: 'Playlist was successfully created.' }
@@ -51,6 +66,25 @@ class PlaylistsController < ApplicationController
   # PATCH/PUT /playlists/1
   # PATCH/PUT /playlists/1.json
   def update
+    #count = @playlist.tracks.find_all
+    
+    #track = @playlist.tracks(playlist[:tracks_attributes][0][:audio])
+    #track = @playlist.tracks(playlist_params[:tracks_attributes][0])[0]
+    #puts "TRACK INFO: " + track.audio_file_name
+    #track = @playlist.tracks.new()
+    Mp3Info.open(playlist_params["tracks_attributes"]["0"]["audio"].path.to_s) do |info|
+      # puts "title: " + info.tag.title
+      # puts "artist: " + info.tag.artist
+      # puts "artist: " + info.tag.album
+      # puts "tracknum: " + info.tag.tracknum.to_s
+      params[:playlist][:tracks_attributes]["0"][:audio_file_name] = info.tag.title
+      params[:playlist][:tracks_attributes]["0"][:artist] = info.tag.artist
+      params[:playlist][:tracks_attributes]["0"][:album]  = info.tag.album
+      params[:playlist][:tracks_attributes]["0"][:label]  = info.tag.label
+      # tracknum = info.tag.tracknum.to_s
+    end
+    
+
     respond_to do |format|
       if @playlist.update(playlist_params)
         format.html { redirect_to @playlist, notice: 'Playlist was successfully updated.' }
@@ -65,6 +99,9 @@ class PlaylistsController < ApplicationController
   # DELETE /playlists/1
   # DELETE /playlists/1.json
   def destroy
+    # @playlist.tracks.each do |track|
+    #   track
+    # end
     @playlist.destroy
     respond_to do |format|
       format.html { redirect_to playlists_url }
