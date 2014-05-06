@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  resources :playlists
-  resources :tracks
+  resources :playlists do
+    resources :tracks
+  end
   
 
   get 'users/new'

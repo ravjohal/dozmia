@@ -31,11 +31,11 @@
   </div>
   <div class="field">
     <%= f.fields_for :tracks, Track.new do |ff| %>
-      <%= ff.file_field :audio %>
+      <%= ff.file_field :audio, :multiple => true %>
     <% end %>
   </div>
   <% if !@playlist.tracks.blank? %>
-  <table id="tracks" class="table">
+  <table id="tracks" class="display">
       <thead>
         <tr>
           <th>Track</th>
