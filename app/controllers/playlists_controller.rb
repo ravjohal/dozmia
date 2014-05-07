@@ -41,10 +41,10 @@ class PlaylistsController < ApplicationController
    # puts " this is the tracks: " + params[:playlist][:audio][0].path.to_s
     tracks = @playlist.tracks
 
-    puts "TRACKS: " + tracks.to_s
+   # puts "TRACKS: " + tracks.to_s
     #puts " this is the tracks: " + params[:playlist][:tracks_attributes]["0"][:audio].to_s
    #tracks = {}
-    index = 0
+   # index = 0
 
     if params[:playlist][:tracks_attributes]
       audio_files = params[:playlist][:tracks_attributes]["0"][:audio]
@@ -73,12 +73,15 @@ class PlaylistsController < ApplicationController
 
           #puts " THIS IS THE NEW TRACK: " + track.audio_file_name.to_s
         end
-        index += 1
+     #   index += 1
       end
     end
 
     respond_to do |format|
       if @playlist.save
+        @playlist.tracks.each do |track|
+          puts "THESE ARE TRACK URL EACH: " + track.audio.url
+        end
         format.html { redirect_to @playlist, notice: 'Playlist was successfully created.' }
         format.json { render action: 'show', status: :created, location: @playlist }
       else
@@ -97,7 +100,7 @@ class PlaylistsController < ApplicationController
     #track = @playlist.tracks(playlist_params[:tracks_attributes][0])[0]
     #puts "TRACK INFO: " + track.audio_file_name
     #track = @playlist.tracks.new()
-    index = 0;
+    #index = 0;
     
     tracks = @playlist.tracks
 
@@ -127,7 +130,7 @@ class PlaylistsController < ApplicationController
 
           #puts " THIS IS THE NEW TRACK: " + track.audio_file_name.to_s
         end
-        index += 1
+      #  index += 1
       end
     end
 
