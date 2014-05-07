@@ -1,5 +1,5 @@
 class Track < ActiveRecord::Base
-	belongs_to :playlist
+  belongs_to :playlist
 
 
   has_attached_file :audio

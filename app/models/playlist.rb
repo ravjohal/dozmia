@@ -12,6 +12,6 @@ class Playlist < ActiveRecord::Base
   validates_attachment_content_type :photo, :content_type => /\Aimage\/.*\Z/
   validates_attachment :photo,:size => { :in => 0..1000.kilobytes }
 
-  accepts_nested_attributes_for :tracks, :allow_destroy => true
+  accepts_nested_attributes_for :tracks, :allow_destroy => true #, :reject_if => lambda { |a| a[:audio_file_name].blank? }
 end
 #:reject_if => lambda { |a| a[:content].blank? }

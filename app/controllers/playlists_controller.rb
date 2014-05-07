@@ -41,48 +41,40 @@ class PlaylistsController < ApplicationController
    # puts " this is the tracks: " + params[:playlist][:audio][0].path.to_s
     tracks = @playlist.tracks
 
-   #  Mp3Info.open(params[:playlist][:audio][0].path.to_s) do |info|
-   #    # puts "title: " + info.tag.title
-   #    # puts "artist: " + info.tag.artist
-   #    # puts "artist: " + info.tag.album
-   #    # puts "tracknum: " + info.tag.tracknum.to_s
-   #    track.audio_file_name = info.tag.title
-   #    track.artist = info.tag.artist
-   #    track.album  = info.tag.album
-   #    # tracknum = info.tag.tracknum.to_s
-   #  end
-   puts "TRACKS: " + tracks.to_s
-    puts " this is the tracks: " + params[:playlist][:tracks_attributes]["0"][:audio].to_s
+    puts "TRACKS: " + tracks.to_s
+    #puts " this is the tracks: " + params[:playlist][:tracks_attributes]["0"][:audio].to_s
    #tracks = {}
-   index = 0
+    index = 0
 
-   audio_files = params[:playlist][:tracks_attributes]["0"][:audio];
+    if params[:playlist][:tracks_attributes]
+      audio_files = params[:playlist][:tracks_attributes]["0"][:audio]
 
-   audio_files.each do |audio|
-    puts " THIS IS EACH AUDIO : " + audio.to_s
-    puts "this is the INDEXXXXXXXXXXXX : " + index.to_s
-      Mp3Info.open(audio.path.to_s) do |info|
-        # puts "title: " + info.tag.title
-        # puts "artist: " + info.tag.artist
-        # puts "artist: " + info.tag.album
-        # puts "tracknum: " + info.tag.tracknum.to_s
-        if index == 0   
-          tracks[0].audio_file_name = info.tag.title
-          tracks[0].artist = info.tag.artist
-          tracks[0].album = info.tag.album
-          tracks[0].label = info.tag.label
-        elsif 
-          track = Track.new()
-          track.audio_file_name = info.tag.title
-          track.artist = info.tag.artist
-          track.album  = info.tag.album
-          track.label  = info.tag.label
-          tracks << track
+      audio_files.each do |audio|
+      puts " THIS IS EACH AUDIO : " + audio.to_s
+      puts "this is the INDEXXXXXXXXXXXX : " + audio.path.to_s
+        Mp3Info.open(audio.path.to_s) do |info|
+          # puts "title: " + info.tag.title
+          # puts "artist: " + info.tag.artist
+          # puts "artist: " + info.tag.album
+          # puts "tracknum: " + info.tag.tracknum.to_s
+          # if index == 0   
+          #   tracks[0].audio_file_name = info.tag.title
+          #   tracks[0].artist = info.tag.artist
+          #   tracks[0].album = info.tag.album
+          #   tracks[0].label = info.tag.label
+          # elsif 
+            track = Track.new()
+            track.audio_file_name = info.tag.title
+            track.artist = info.tag.artist
+            track.album  = info.tag.album
+            track.label  = info.tag.label
+            tracks << track
+          # end
+
+          #puts " THIS IS THE NEW TRACK: " + track.audio_file_name.to_s
         end
-
-        #puts " THIS IS THE NEW TRACK: " + track.audio_file_name.to_s
+        index += 1
       end
-      index += 1
     end
 
     respond_to do |format|
@@ -105,17 +97,53 @@ class PlaylistsController < ApplicationController
     #track = @playlist.tracks(playlist_params[:tracks_attributes][0])[0]
     #puts "TRACK INFO: " + track.audio_file_name
     #track = @playlist.tracks.new()
-    Mp3Info.open(playlist_params["tracks_attributes"]["0"]["audio"].path.to_s) do |info|
-      # puts "title: " + info.tag.title
-      # puts "artist: " + info.tag.artist
-      # puts "artist: " + info.tag.album
-      # puts "tracknum: " + info.tag.tracknum.to_s
-      params[:playlist][:tracks_attributes]["0"][:audio_file_name] = info.tag.title
-      params[:playlist][:tracks_attributes]["0"][:artist] = info.tag.artist
-      params[:playlist][:tracks_attributes]["0"][:album]  = info.tag.album
-      params[:playlist][:tracks_attributes]["0"][:label]  = info.tag.label
-      # tracknum = info.tag.tracknum.to_s
+    index = 0;
+    
+    tracks = @playlist.tracks
+
+    if params[:playlist][:tracks_attributes]["0"]
+      audio_files = params[:playlist][:tracks_attributes]["0"][:audio];
+      audio_files.each do |audio|
+      puts " THIS IS EACH AUDIO : " + audio.to_s
+       puts "this is the  INDEXXXXXXXXXXXX: " + audio.path.to_s
+        Mp3Info.open(audio.path.to_s) do |info|
+          # puts "title: " + info.tag.title
+          # puts "artist: " + info.tag.artist
+          # puts "artist: " + info.tag.album
+          # puts "tracknum: " + info.tag.tracknum.to_s
+          # if index == 0   
+          #   tracks[0].audio_file_name = info.tag.title
+          #   tracks[0].artist = info.tag.artist
+          #   tracks[0].album = info.tag.album
+          #   tracks[0].label = info.tag.label
+          # elsif 
+            track = Track.new()
+            track.audio_file_name = info.tag.title
+            track.artist = info.tag.artist
+            track.album  = info.tag.album
+            track.label  = info.tag.label
+            tracks << track
+          # end
+
+          #puts " THIS IS THE NEW TRACK: " + track.audio_file_name.to_s
+        end
+        index += 1
+      end
     end
+
+
+
+    # Mp3Info.open(playlist_params["tracks_attributes"]["0"]["audio"].path.to_s) do |info|
+    #   # puts "title: " + info.tag.title
+    #   # puts "artist: " + info.tag.artist
+    #   # puts "artist: " + info.tag.album
+    #   # puts "tracknum: " + info.tag.tracknum.to_s
+    #   params[:playlist][:tracks_attributes]["0"][:audio_file_name] = info.tag.title
+    #   params[:playlist][:tracks_attributes]["0"][:artist] = info.tag.artist
+    #   params[:playlist][:tracks_attributes]["0"][:album]  = info.tag.album
+    #   params[:playlist][:tracks_attributes]["0"][:label]  = info.tag.label
+    #   # tracknum = info.tag.tracknum.to_s
+    # end
     
 
     respond_to do |format|
@@ -151,6 +179,6 @@ class PlaylistsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def playlist_params
       params.require(:playlist).permit(:name, :description, :photo, :photo_file_name, :photo_content_type, :photo_file_size,
-          :tracks_attributes => [:id, :title, :artist, :album, :label, :ismn_num, :total_plays, :playlist_id, :audio, :audio_file_name, :audio_content_type, :audio_file_size])
+          :tracks_attributes => [:id, :title, :artist, :album, :label, :ismn_num, :total_plays, :playlist_id, :audio, :audio_file_name, :audio_content_type, :audio_file_size, :_destroy])
     end
 end
